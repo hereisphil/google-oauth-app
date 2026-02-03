@@ -2,7 +2,9 @@
 
 This repository contains my work for the **Project and Portfolio III** course at **Full Sail University**.  
 The objective is to create a **Full-Stack Web app** with _clean code_, _seperation of concerns_, and of course, use the
-official **Spotify Web API** _[link](https://developer.spotify.com/documentation/web-api)_
+official **Spotify Web API** _[(documentation)](https://developer.spotify.com/documentation/web-api)_
+
+> Last Updated: February 3, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -29,17 +31,35 @@ official **Spotify Web API** _[link](https://developer.spotify.com/documentation
 
 ## 🚀 Getting Started
 
-1. Clone the project to your machine
+1. Open your Terminal and Clone the project to your machine
 
 ```bash
 git clone https://github.com/hereisphil/spotify-search-project.git
 ```
 
+2. Run `cd spotify-search-project` and then `cd server`
+
+2. Create a `.env` file from the `.env.example` and add a PORT _(optional)_
+
+3. Install the needed packages:
+
+```bash
+npm install
+```
+
+4. Run the develpoment server:
+
+```bash
+npm run dev
+```
+
+5. Test
+
 ---
 
 ## 🔗 Links
 
-_coming soon_
+- <http://localhost:3001> - Link to Node.js/Express server _(if using .env.example)_
 
 ---
 
