@@ -17,7 +17,7 @@ router.get("/", (req: Request, res: Response) => {
 /* -------------------------------------------------------------------------- */
 /*                           Route for Google OAuth                           */
 /* -------------------------------------------------------------------------- */
-router.get("/api/auth/google/url", (_req, res) => {
+router.get("/auth/google/url", (_req, res) => {
     const url = getGoogleOauthUrl();
     res.status(200).json({ url });
 });
