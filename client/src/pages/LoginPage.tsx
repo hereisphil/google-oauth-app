@@ -1,7 +1,22 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
+import { useToken } from "../utils/useToken";
 
 export function LoginPage() {
+    const { setToken } = useToken();
+
     const [googleOauthUrl, setGoogleOauthUrl] = useState("");
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const queryParams = new URLSearchParams(location.search);
+    const oauthToken = queryParams.get("token");
+    useEffect(() => {
+        if (oauthToken) {
+            setToken(oauthToken);
+            navigate("/user-info", { replace: true });
+        }
+    }, [oauthToken, setToken, navigate]);
 
     useEffect(() => {
         const loadOauthUrl = async () => {
