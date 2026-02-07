@@ -39,7 +39,7 @@ git clone https://github.com/hereisphil/google-oauth-app.git
 ```
 
 <p style="font-size: 1.25rem; font-weight: bold; color: green">
-server (backend):
+Server (backend):
 </p>
 
 2. Run `cd google-oauth-app` and then `cd server`
@@ -51,7 +51,7 @@ server (backend):
 5. Run the server: `npm run dev`
 
 <p style="font-size: 1.25rem; font-weight: bold; color: green;">
-client (frontend):
+Client (frontend):
 </p>
 
 6. Open another terminal and `cd` into `/clent`
@@ -66,8 +66,26 @@ client (frontend):
 
 ## 🔗 Links
 
-- <http://localhost:3001> - Link to Node.js/Express server _(if using .env.example)_
-- <http://localhost:5173> - Link to React.js client
+### **Backend (Node.js / Express)**
+
+**Base URL:** `http://localhost:3001`
+
+| Route | Description |
+| :--- | :--- |
+| [`/api/v1`](http://localhost:3001/api/v1) | Health check to ensure API routes are working. |
+| [`/api/v1/auth/google/url`](http://localhost:3001/api/v1/auth/google/url) | Retrieves Google OAuth login URL to use on the frontend. |
+| [`/api/v1/auth/google/callback`](http://localhost:3001/api/v1/auth/google/callback) | Expects `?code=` from Google and sets JWT on frontend. |
+
+---
+
+### **Frontend (React Client)**
+
+**Base URL:** `http://localhost:5173`
+
+| Route | Description |
+| :--- | :--- |
+| [`/login`](http://localhost:5173/login) | Login page; `useEffect` calls backend to enable **Login with Google** button. |
+| [`/user-info`](http://localhost:5173/user-info) | **Protected Route**; accessible only after a user logs in. |
 
 ---
 
