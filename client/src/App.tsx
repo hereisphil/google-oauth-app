@@ -1,38 +1,27 @@
-import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router";
+import { Home } from "./pages/Home.tsx";
+import { LoginPage } from "./pages/LoginPage.tsx";
+import { UserInfoPage } from "./pages/UserInfoPage.tsx";
+import { PrivateRoute } from "./utils/PrivateRoute.tsx";
+import { useToken } from "./utils/useToken.ts";
 
 function App() {
-    const [googleOauthUrl, setGoogleOauthUrl] = useState("");
-
-    useEffect(() => {
-        const loadOauthUrl = async () => {
-            try {
-                const response = await fetch(
-                    "http://localhost:3001/api/v1/auth/google/url",
-                );
-                const data = await response.json();
-                const { url } = data;
-                setGoogleOauthUrl(url);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        loadOauthUrl();
-    }, []);
+    const { token } = useToken();
 
     return (
-        <main>
-            <h1>Log In</h1>
-            <hr />
-            <button
-                disabled={!googleOauthUrl}
-                onClick={() => {
-                    window.location.href = googleOauthUrl;
-                }}
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            {/* PRIVATE ROUTES: */}
+            <Route
+                element={
+                    <PrivateRoute redirectPath="/login" isAllowed={!!token} />
+                }
             >
-                Log in with Google
-            </button>
-        </main>
+                <Route path="/user-info" element={<UserInfoPage />} />
+            </Route>
+        </Routes>
     );
 }
 

@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import express from "express";
-import { getGoogleOauthUrl } from "../utils/googleOauthUtil.js";
+import jwt from "jsonwebtoken";
+import { getGoogleOauthUrl, getGoogleUser } from "../utils/googleOauthUtil.js";
 const router = express.Router();
 
 /* -------------------------------------------------------------------------- */
@@ -15,11 +16,38 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 /* -------------------------------------------------------------------------- */
-/*                           Route for Google OAuth                           */
+/*                           Routed for Google OAuth                          */
 /* -------------------------------------------------------------------------- */
 router.get("/auth/google/url", (_req, res) => {
     const url = getGoogleOauthUrl();
     res.status(200).json({ url });
+});
+
+router.get("/auth/google/callback", async (req, res) => {
+    try {
+        const code = String(req.query.code || ""); // Google gives us the code in the URL
+        if (!code) return res.status(400).send("Missing code");
+
+        const googleUser = await getGoogleUser(code);
+        if (!googleUser) return res.sendStatus(500);
+
+        const token = jwt.sign(
+            {
+                id: googleUser.id,
+                email: googleUser.email,
+                name: googleUser.name,
+                picture: googleUser.picture,
+                email_verified: googleUser.verified_email,
+            },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "15m" },
+        );
+
+        return res.redirect(`http://localhost:5173/login?token=${token}`);
+    } catch (err) {
+        console.error(err);
+        return res.sendStatus(500);
+    }
 });
 
 export default router;

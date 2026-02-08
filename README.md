@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 3, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 4, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -32,35 +32,60 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 
 ## 🚀 Getting Started
 
-1. Open your Terminal and Clone the project to your machine
+1. Open your **Terminal** and **Clone** the project to your machine
 
 ```bash
 git clone https://github.com/hereisphil/google-oauth-app.git
 ```
 
+<p style="font-size: 1.25rem; font-weight: bold; color: green">
+Server (backend):
+</p>
+
 2. Run `cd google-oauth-app` and then `cd server`
 
-2. Create a `.env` file from the `.env.example` and add a PORT _(optional)_
+3. Create a `.env` file from the `.env.example` and add a **PORT** _(optional)_
 
-3. Install the needed packages:
+4. Install the needed packages: `npm install`
 
-```bash
-npm install
-```
+5. Run the server: `npm run dev`
 
-4. Run the develpoment server:
+<p style="font-size: 1.25rem; font-weight: bold; color: green;">
+Client (frontend):
+</p>
 
-```bash
-npm run dev
-```
+6. Open another terminal and `cd` into `/clent`
 
-5. Test
+7. Install the needed packages: `npm install`
+
+8. Start the client: `npm run dev`
+
+9. Open a web browser & Go to <http://localhost:5173> & TEST
 
 ---
 
 ## 🔗 Links
 
-- <http://localhost:3001> - Link to Node.js/Express server _(if using .env.example)_
+### **Backend (Node.js / Express)**
+
+**Base URL:** `http://localhost:3001`
+
+| Route | Description |
+| :--- | :--- |
+| [`/api/v1`](http://localhost:3001/api/v1) | Health check to ensure API routes are working. |
+| [`/api/v1/auth/google/url`](http://localhost:3001/api/v1/auth/google/url) | Retrieves Google OAuth login URL to use on the frontend. |
+| [`/api/v1/auth/google/callback`](http://localhost:3001/api/v1/auth/google/callback) | Expects `?code=` from Google and sets JWT on frontend. |
+
+---
+
+### **Frontend (React Client)**
+
+**Base URL:** `http://localhost:5173`
+
+| Route | Description |
+| :--- | :--- |
+| [`/login`](http://localhost:5173/login) | Login page; `useEffect` calls backend to enable **Login with Google** button. |
+| [`/user-info`](http://localhost:5173/user-info) | **Protected Route**; accessible only after a user logs in. |
 
 ---
 
