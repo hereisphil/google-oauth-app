@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 4, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 7, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
