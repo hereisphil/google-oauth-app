@@ -30,7 +30,19 @@ router.get("/auth/google/callback", async (req, res) => {
 
         const googleUser = await getGoogleUser(code);
         if (!googleUser) return res.sendStatus(500);
-
+        // console.log("Google User:", googleUser);
+        // EXAMPLE GOOGLE USER OBJECT RETURNED:
+        /*
+        Google User: {
+            id: '100832796974636964746',
+            email: 'thereisphil@gmail.com',
+            verified_email: true,
+            name: 'Phillip Cantu',
+            given_name: 'Phillip',
+            family_name: 'Cantu',
+            picture: 'https://lh3.googleusercontent.com/a/ACg8ocIVzWll7YrhCqwR3qZxAvkMN0Ox5e9kbfNeepCxLg8d6A3AsJyr=s96-c'
+          }
+        */
         const token = jwt.sign(
             {
                 id: googleUser.id,

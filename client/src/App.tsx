@@ -6,7 +6,7 @@ import { PrivateRoute } from "./utils/PrivateRoute.tsx";
 import { useToken } from "./utils/useToken.ts";
 
 function App() {
-    const { token } = useToken();
+    const { token } = useToken(); // immediately checks for token in localStorage
 
     return (
         <Routes>
