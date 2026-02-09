@@ -12,6 +12,7 @@ const userSchema = new Schema(
             required: [true, "User email is required"],
             unique: [true, "This Google User already exists."],
             trim: true,
+            index: true,
         },
        name: String,
        pictureUrl: String,
