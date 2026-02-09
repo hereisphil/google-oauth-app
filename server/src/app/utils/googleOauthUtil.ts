@@ -1,4 +1,6 @@
 import { google } from "googleapis";
+import type { User } from "../model/User.js";
+import UserModel from "../model/User.js";
 
 const oauthClient = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -19,9 +21,9 @@ export const getGoogleOauthUrl = () => {
 interface GoogleUser {
     id: string;
     email: string;
+    verified_email: boolean;
     name: string;
     picture: string;
-    verified_email: boolean;
 }
 
 export const getGoogleUser = async (
@@ -29,7 +31,17 @@ export const getGoogleUser = async (
 ): Promise<GoogleUser | undefined> => {
     try {
         const { tokens } = await oauthClient.getToken(code);
-
+        // console.log("OAUTH TOKENS >>>", tokens);
+        // Example response:
+        /* {
+            access_token: 'STRING',
+            refresh_token: 'STRING',
+            scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid',
+            token_type: 'Bearer',
+            id_token: 'STRING',
+            expiry_date: 1770496093586
+        }
+        */
         if (!tokens.access_token) {
             throw new Error("Missing access_token from Google token response");
         }
@@ -51,5 +63,24 @@ export const getGoogleUser = async (
     } catch (error) {
         console.log(error);
         return undefined;
+    }
+};
+
+export const updateOrCreateUserFromOauth = async (user: GoogleUser) => {
+    const { id, email, name, picture } = user;
+
+    const existingUser = await UserModel.findOne({ email }).exec();
+    if (existingUser) {
+        return existingUser;
+    } else {
+        const newUser: User = await UserModel.create({ 
+            googleId: id,
+            email,
+            name,
+            pictureUrl: picture,
+
+        }); 
+
+        return newUser;
     }
 };
