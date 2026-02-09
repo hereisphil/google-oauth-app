@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import express from "express";
 import jwt from "jsonwebtoken";
-import { getGoogleOauthUrl, getGoogleUser } from "../utils/googleOauthUtil.js";
+import { getGoogleOauthUrl, getGoogleUser, updateOrCreateUserFromOauth } from "../utils/googleOauthUtil.js";
 const router = express.Router();
 
 /* -------------------------------------------------------------------------- */
@@ -43,13 +43,13 @@ router.get("/auth/google/callback", async (req, res) => {
             picture: 'https://lh3.googleusercontent.com/a/ACg8ocIVzWll7YrhCqwR3qZxAvkMN0Ox5e9kbfNeepCxLg8d6A3AsJyr=s96-c'
           }
         */
+        const createdUser = await updateOrCreateUserFromOauth(googleUser); // New user from Google OAuth
         const token = jwt.sign(
             {
-                id: googleUser.id,
-                email: googleUser.email,
-                name: googleUser.name,
-                picture: googleUser.picture,
-                email_verified: googleUser.verified_email,
+                id: createdUser.googleId,
+                email: createdUser.email,
+                name: createdUser.name,
+                picture: createdUser.pictureUrl,
             },
             process.env.JWT_SECRET as string,
             { expiresIn: "15m" },
