@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 8, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 9, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -24,6 +24,7 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 
 - Node.js >= v24.13.0 (LTS)
 - npm
+- git
 - Modern Web Browser (Google Chrome or Chrome derivative recommended)
 - [Google developer account](https://support.google.com/cloud/answer/15544987?hl=en)
 - .env file (follow the .env.example)
