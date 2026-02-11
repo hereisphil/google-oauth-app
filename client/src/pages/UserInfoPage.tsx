@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import logout from "@/utils/logout";
 import { useToken } from "../utils/useToken";
 
 export function UserInfoPage() {
@@ -12,13 +13,7 @@ export function UserInfoPage() {
                 {JSON.stringify(user, null, 2)}
             </pre>
 
-            <Button
-                style={{ marginTop: "1rem" }}
-                onClick={() => {
-                    localStorage.removeItem("token");
-                    window.location.href = "/login";
-                }}
-            >
+            <Button style={{ marginTop: "1rem" }} onClick={logout}>
                 Log out
             </Button>
         </main>
