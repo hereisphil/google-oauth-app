@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useToken } from "../utils/useToken";
 
 export function UserInfoPage() {
@@ -11,7 +12,7 @@ export function UserInfoPage() {
                 {JSON.stringify(user, null, 2)}
             </pre>
 
-            <button
+            <Button
                 style={{ marginTop: "1rem" }}
                 onClick={() => {
                     localStorage.removeItem("token");
@@ -19,7 +20,7 @@ export function UserInfoPage() {
                 }}
             >
                 Log out
-            </button>
+            </Button>
         </main>
     );
 }

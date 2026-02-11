@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { useToken } from "../utils/useToken";
@@ -47,14 +48,14 @@ export function LoginPage() {
         <main>
             <h1>Log In</h1>
             <hr />
-            <button
+            <Button
                 disabled={!googleOauthUrl}
                 onClick={() => {
                     window.location.href = googleOauthUrl;
                 }}
             >
                 Log in with Google
-            </button>
+            </Button>
         </main>
     );
 }
