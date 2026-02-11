@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 9, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 11, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -71,11 +71,11 @@ Client (frontend):
 
 **Base URL:** `http://localhost:3001`
 
-| Route | Description |
-| :--- | :--- |
-| [`/api/v1`](http://localhost:3001/api/v1) | Health check to ensure API routes are working. |
-| [`/api/v1/auth/google/url`](http://localhost:3001/api/v1/auth/google/url) | Retrieves Google OAuth login URL to use on the frontend. |
-| [`/api/v1/auth/google/callback`](http://localhost:3001/api/v1/auth/google/callback) | Expects `?code=` from Google and sets JWT on frontend. |
+| Route                                                                               | Description                                              |
+| :---------------------------------------------------------------------------------- | :------------------------------------------------------- |
+| [`/api/v1`](http://localhost:3001/api/v1)                                           | Health check to ensure API routes are working.           |
+| [`/api/v1/auth/google/url`](http://localhost:3001/api/v1/auth/google/url)           | Retrieves Google OAuth login URL to use on the frontend. |
+| [`/api/v1/auth/google/callback`](http://localhost:3001/api/v1/auth/google/callback) | Expects `?code=` from Google and sets JWT on frontend.   |
 
 ---
 
@@ -83,10 +83,10 @@ Client (frontend):
 
 **Base URL:** `http://localhost:5173`
 
-| Route | Description |
-| :--- | :--- |
-| [`/login`](http://localhost:5173/login) | Login page; `useEffect` calls backend to enable **Login with Google** button. |
-| [`/user-info`](http://localhost:5173/user-info) | **Protected Route**; accessible only after a user logs in. |
+| Route                                           | Description                                                                   |
+| :---------------------------------------------- | :---------------------------------------------------------------------------- |
+| [`/login`](http://localhost:5173/login)         | Login page; `useEffect` calls backend to enable **Login with Google** button. |
+| [`/user-info`](http://localhost:5173/user-info) | **Protected Route**; accessible only after a user logs in.                    |
 
 ---
 
