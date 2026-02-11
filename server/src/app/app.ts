@@ -7,10 +7,7 @@ import routeHandler from "./routes/index.js";
 const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors()); // Will likely need to explicitly give allowed origin urls
-
-//TODO: Setup express-session
-//TODO: Setup 404 routes
+app.use(cors());
 
 app.get("/", (_req: Request, res: Response) => {
     res.status(200).json({

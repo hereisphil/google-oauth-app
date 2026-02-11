@@ -1,11 +1,7 @@
 import { Navigate, Outlet } from "react-router";
+import { useToken } from "./useToken";
 
-export const PrivateRoute = ({
-    isAllowed,
-    redirectPath,
-}: {
-    isAllowed: boolean;
-    redirectPath: string;
-}) => {
-    return isAllowed ? <Outlet /> : <Navigate to={redirectPath} replace />;
+export const PrivateRoute = ({ redirectPath }: { redirectPath: string }) => {
+    const { user } = useToken();
+    return user ? <Outlet /> : <Navigate to={redirectPath} replace />;
 };
