@@ -1,48 +1,98 @@
-import { createContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 
 /* -------------------------------------------------------------------------- */
-/*                           TS: Types & Interfaces:                          */
+/*                        TypeScript Types & Interfaces                       */
 /* -------------------------------------------------------------------------- */
+
+// The token is either a string (when logged in) or null (when logged out)
 type Token = string | null;
 
-interface TokenContextValue {
+// The user object returned from the backend after verifying the token
+export interface AuthUser {
+    _id?: string;
+    googleId: string;
+    email: string;
+    name?: string;
+    pictureUrl?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+// The context value will include the token, the user, and a function to update the token
+// This is what components will use when they use the context
+type TokenContextValue = {
     token: Token;
+    user: AuthUser | null;
     setToken: (newToken: Token) => void;
-}
+};
 
-interface TokenProviderProps {
-    children: ReactNode;
-}
+/* -------------------------------------------------------------------------- */
+/*                            Begin Writing Context                           */
+/* -------------------------------------------------------------------------- */
 
-// Function needed to get the Token and use it in the app
 // eslint-disable-next-line react-refresh/only-export-components
-export const TokenContext = createContext<TokenContextValue | undefined>(
-    undefined,
-);
+export const TokenContext = createContext<TokenContextValue>({
+    token: null,
+    user: null,
+    setToken: () => {},
+});
 
-// Provider that wraps the entire App to ensure the Token is accessible everywhere
-export const TokenProvider = ({ children }: TokenProviderProps) => {
-    const [token, setTokenInternal] = useState<Token>(() => {
-        return localStorage.getItem("token"); // Using localStorage, may update later
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
+
+export const TokenProvider = ({ children }: { children: ReactNode }) => {
+    const [token, setToken] = useState<Token>(() => {
+        return localStorage.getItem("token");
     });
 
-    const setToken = (newToken: Token) => {
+    const [user, setUser] = useState<AuthUser | null>(null);
+
+    // keep token + localStorage in sync
+    const updateToken = (newToken: Token) => {
         if (!newToken) {
             localStorage.removeItem("token");
-            setTokenInternal(null);
+            setToken(null);
             return;
         }
-
         localStorage.setItem("token", newToken);
-        setTokenInternal(newToken);
+        setToken(newToken);
     };
 
-    const value = useMemo<TokenContextValue>(
-        () => ({ token, setToken }),
-        [token],
-    );
+    // Verify token on app load + whenever token changes
+    useEffect(() => {
+        const verifyToken = async () => {
+            if (!token) {
+                setUser(null);
+                return;
+            }
+            try {
+                const res = await fetch(`${API_BASE}/api/v1/auth/token`, {
+                    method: "GET",
+                    headers: {
+                        // backend expects the token in authorization
+                        Authorization: token,
+                    },
+                });
+
+                if (!res.ok) {
+                    setUser(null);
+                    localStorage.removeItem("token");
+                    setToken(null);
+                    return;
+                }
+
+                const data = (await res.json()) as AuthUser;
+                setUser(data);
+            } catch (err) {
+                setUser(null);
+                console.error("Error verifying token:", err);
+            }
+        };
+        verifyToken();
+    }, [token]);
 
     return (
-        <TokenContext.Provider value={value}>{children}</TokenContext.Provider>
+        <TokenContext.Provider value={{ token, user, setToken: updateToken }}>
+            {children}
+        </TokenContext.Provider>
     );
 };

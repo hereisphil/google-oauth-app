@@ -3,22 +3,15 @@ import { Home } from "./pages/Home.tsx";
 import { LoginPage } from "./pages/LoginPage.tsx";
 import { UserInfoPage } from "./pages/UserInfoPage.tsx";
 import { PrivateRoute } from "./utils/PrivateRoute.tsx";
-import { useToken } from "./utils/useToken.ts";
 
 function App() {
-    const { token } = useToken(); // immediately checks for token in localStorage
-
     return (
         <Routes>
             <Route index element={<Home />} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             {/* PRIVATE ROUTES: */}
-            <Route
-                element={
-                    <PrivateRoute redirectPath="/login" isAllowed={!!token} />
-                }
-            >
+            <Route element={<PrivateRoute redirectPath="/login" />}>
                 <Route path="/user-info" element={<UserInfoPage />} />
             </Route>
         </Routes>

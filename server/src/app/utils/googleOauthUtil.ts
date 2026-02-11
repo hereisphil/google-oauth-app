@@ -69,17 +69,16 @@ export const getGoogleUser = async (
 export const updateOrCreateUserFromOauth = async (user: GoogleUser) => {
     const { id, email, name, picture } = user;
 
-    const existingUser = await UserModel.findOne({ email }).exec();
+    const existingUser = await UserModel.findOne({ googleId: id }).exec();
     if (existingUser) {
         return existingUser;
     } else {
-        const newUser: User = await UserModel.create({ 
+        const newUser: User = await UserModel.create({
             googleId: id,
             email,
             name,
             pictureUrl: picture,
-
-        }); 
+        });
 
         return newUser;
     }
