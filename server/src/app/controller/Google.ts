@@ -1,7 +1,10 @@
 import type { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import { getGoogleOauthUrl, getGoogleUser, updateOrCreateUserFromOauth } from "../utils/googleOauthUtil.js";
-
+import {
+    getGoogleOauthUrl,
+    getGoogleUser,
+    updateOrCreateUserFromOauth,
+} from "../utils/googleOauthUtil.js";
 
 export const getGoogleOauthUrlRoute: RequestHandler = async (_req, res) => {
     const url = getGoogleOauthUrl();
@@ -22,7 +25,7 @@ export const callbackRoute: RequestHandler = async (req, res) => {
                 id: createdUser.googleId,
             },
             process.env.JWT_SECRET as string,
-            { expiresIn: "15m" },
+            { expiresIn: "36h" },
         );
 
         return res.redirect(`http://localhost:5173/login?token=${token}`);
