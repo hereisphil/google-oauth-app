@@ -15,10 +15,13 @@ const userSchema = new Schema(
             trim: true,
             lowercase: true,
         },
-       name: String,
-       pictureUrl: String,
+        name: String,
+        pictureUrl: String,
+        accessToken: String,
+        refreshToken: String,
+        accessTokenExpiresAt: Date,
     },
-    { timestamps: true }
+    { timestamps: true },
 );
 
 export type User = InferSchemaType<typeof userSchema>; // TS User type that can be used as needed
