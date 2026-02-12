@@ -4,7 +4,7 @@ import {
 } from "@googleworkspace/drive-picker-react";
 import React from "react";
 
-const GDrivePicker = () => {
+const GDrivePicker = ({ oauthToken }: { oauthToken: string }) => {
     const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
     const APP_ID = import.meta.env.VITE_APP_ID;
 
@@ -15,6 +15,7 @@ const GDrivePicker = () => {
             <DrivePicker
                 client-id={CLIENT_ID}
                 app-id={APP_ID}
+                oauth-token={oauthToken}
                 onOauthResponse={(e) => setEvents([...events, e.detail])}
                 onPicked={(e) => setEvents([...events, e.detail])}
                 onCanceled={(e) => setEvents([...events, e.detail])}

@@ -6,6 +6,7 @@ import { useToken } from "../utils/useToken";
 
 export function UserInfoPage() {
     const { user } = useToken();
+    // console.log("UserInfoPage user >>>", user);
     const [showPicker, setShowPicker] = useState(false);
 
     return (
@@ -17,7 +18,7 @@ export function UserInfoPage() {
             </pre>
 
             {showPicker ? (
-                <GDrivePicker />
+                <GDrivePicker oauthToken={user?.accessToken || ""} />
             ) : (
                 <Button
                     style={{ marginTop: "1rem" }}
