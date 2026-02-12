@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 11, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 12, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -17,6 +17,13 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 - Frontend + backend separated
 - JWT-based authentication flow
 - User authentication (Login / Logout / Protected Routes)
+
+---
+
+## 🙏 Giving Credit
+
+- **[React: Authentication](https://www.linkedin.com/learning/react-authentication-25660373/)** - A LinkedIn Learning course by **[Shaun Wassell](https://www.linkedin.com/in/shaun-wassell)** served as the MAJOR foundation for learning and implementing Google OAuth.
+- **[Google APIs Node.js Client](https://www.npmjs.com/package/googleapis)** is the official library for using Google APIs, created and maintained by Google themselves, and much of its documentation and **[Sample Code](https://github.com/googleapis/google-api-nodejs-client/tree/main/samples)** helped this project go beyond Wassell's course.
 
 ---
 
