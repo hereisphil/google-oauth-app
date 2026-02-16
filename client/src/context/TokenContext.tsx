@@ -9,13 +9,16 @@ type Token = string | null;
 
 // The user object returned from the backend after verifying the token
 export interface AuthUser {
-    _id?: string;
+    _id: string;
     googleId: string;
     email: string;
     name?: string;
     pictureUrl?: string;
     createdAt?: string;
     updatedAt?: string;
+    refreshToken?: string;
+    accessToken?: string;
+    accessTokenExpiresAt?: string;
 }
 
 // The context value will include the token, the user, and a function to update the token
