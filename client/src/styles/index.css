@@ -119,7 +119,10 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground text-lg font-sans antialiased;
+    }
+    main {
+        @apply min-h-screen flex flex-col items-center justify-start p-4 gap-4;
     }
 }
 
