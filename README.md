@@ -5,7 +5,7 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 12, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 17, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
 
@@ -24,10 +24,35 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 
 - **[React: Authentication](https://www.linkedin.com/learning/react-authentication-25660373/)** - A LinkedIn Learning course by **[Shaun Wassell](https://www.linkedin.com/in/shaun-wassell)** served as the MAJOR foundation for learning and implementing Google OAuth.
 - **[Google APIs Node.js Client](https://www.npmjs.com/package/googleapis)** is the official library for using Google APIs, created and maintained by Google themselves, and much of its documentation and **[Sample Code](https://github.com/googleapis/google-api-nodejs-client/tree/main/samples)** helped this project go beyond Wassell's course.
+- **[Login UI inspiration](https://www.figma.com/community/file/1026170425902325131/loginuiconcept)** is from a public Figma design by **[Leo Barreto](https://www.figma.com/@LeoBarreto)**.
 
 ---
 
-## ⚠️ Prerequisites
+## 🕹️ Tech Stack (MERN TypeScript)
+
+> Note: for a complete list of all packages/libaries used please see the **package.json** files.
+
+<p style="font-size: 1.25rem; font-weight: bold; color: pink">
+Server (backend):
+</p>
+
+- Node.js
+- Express.js
+- Mongoose
+- GoogleAPIs
+- jsonwebtoken
+
+<p style="font-size: 1.25rem; font-weight: bold; color: lightblue;">
+Client (frontend):
+</p>
+
+- Vite + React.js
+- Tailwind CSS
+- shadCN/UI
+
+---
+
+## ⚠️ Local Install Prerequisites
 
 - Node.js >= v24.13.0 (LTS)
 - npm
@@ -35,6 +60,7 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 - Modern Web Browser (Google Chrome or Chrome derivative recommended)
 - [Google developer account](https://support.google.com/cloud/answer/15544987?hl=en)
 - .env file (follow the .env.example)
+- [MongoDB](https://www.mongodb.com/products/tools/compass) - **Optional** if you'd like to create and test your own personal data you can install MongoDB to your local machine
 
 ---
 
@@ -46,29 +72,31 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 git clone https://github.com/hereisphil/google-oauth-app.git
 ```
 
-<p style="font-size: 1.25rem; font-weight: bold; color: green">
+<p style="font-size: 1.25rem; font-weight: bold; color: pink">
 Server (backend):
 </p>
 
 2. Run `cd google-oauth-app` and then `cd server`
 
-3. Create a `.env` file from the `.env.example` and add a **PORT** _(optional)_
+3. Create a `.env` file from the `.env.example` and add **Needed Variables**
 
 4. Install the needed packages: `npm install`
 
 5. Run the server: `npm run dev`
 
-<p style="font-size: 1.25rem; font-weight: bold; color: green;">
+<p style="font-size: 1.25rem; font-weight: bold; color: lightblue;">
 Client (frontend):
 </p>
 
 6. Open another terminal and `cd` into `/clent`
 
-7. Install the needed packages: `npm install`
+7. Create a `.env` file from the `.env.example` and add **Needed Variables**
 
-8. Start the client: `npm run dev`
+8. Install the needed packages: `npm install`
 
-9. Open a web browser & Go to <http://localhost:5173> & TEST
+9. Start the client: `npm run dev`
+
+10. Open a web browser & Go to <http://localhost:5173> & TEST 🎉
 
 ---
 
