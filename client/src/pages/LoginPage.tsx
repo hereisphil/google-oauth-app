@@ -47,7 +47,7 @@ export function LoginPage() {
     }, []);
 
     return (
-        <main>
+        <main className="flex flex-col items-center justify-start gap-4">
             <div className="flex items-stretch bg-slate-200 rounded-xl shadow-xl overflow-hidden w-full max-w-5xl">
                 <div className="p-6 flex-1 flex items-center justify-center">
                     <img
