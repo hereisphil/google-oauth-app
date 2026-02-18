@@ -40,7 +40,7 @@ export const Home = () => {
                         A simple tool for freelancers and independent workers to
                         stay organized and follow up on time.
                     </p>
-                    <Button onClick={() => navigate("/login")}>
+                    <Button size="xl" onClick={() => navigate("/login")}>
                         Start organizing today →
                     </Button>
                 </div>
