@@ -1,6 +1,5 @@
 import GDrivePicker from "@/components/google/GDrivePicker";
 import { Button } from "@/components/ui/button";
-import logout from "@/utils/logout";
 import { useState } from "react";
 import { useToken } from "../utils/useToken";
 
@@ -10,27 +9,22 @@ export function UserInfoPage() {
     const [showPicker, setShowPicker] = useState(false);
 
     return (
-        <main style={{ padding: "2rem" }}>
-            <h1>User Info</h1>
-
-            <pre style={{ marginTop: "1rem" }}>
-                {JSON.stringify(user, null, 2)}
-            </pre>
+        <main className="flex flex-col items-center gap-8">
+            <h1 className="font-bold text-3xl underline underline-offset-4">
+                User Info
+            </h1>
 
             {showPicker ? (
                 <GDrivePicker oauthToken={user?.accessToken || ""} />
             ) : (
-                <Button
-                    style={{ marginTop: "1rem" }}
-                    onClick={() => setShowPicker(!showPicker)}
-                >
+                <Button onClick={() => setShowPicker(!showPicker)}>
                     Show Google Drive Picker
                 </Button>
             )}
 
-            <Button style={{ marginTop: "1rem" }} onClick={logout}>
-                Log out
-            </Button>
+            <pre className="mt-2 bg-accent border-2 shadow-2xl rounded-2xl p-4 overflow-auto max-w-300">
+                {JSON.stringify(user, null, 2)}
+            </pre>
         </main>
     );
 }

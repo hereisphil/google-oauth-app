@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
         <footer className="bg-gray-800 text-white py-4 text-center">
-            <p>
+            <p className="text-sm md:text-lg">
                 &copy; {new Date().getFullYear()} Google OAuth App. All rights
                 reserved.
             </p>
