@@ -25,6 +25,7 @@ implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/a
 - **[React: Authentication](https://www.linkedin.com/learning/react-authentication-25660373/)** - A LinkedIn Learning course by **[Shaun Wassell](https://www.linkedin.com/in/shaun-wassell)** served as the MAJOR foundation for learning and implementing Google OAuth.
 - **[Google APIs Node.js Client](https://www.npmjs.com/package/googleapis)** is the official library for using Google APIs, created and maintained by Google themselves, and much of its documentation and **[Sample Code](https://github.com/googleapis/google-api-nodejs-client/tree/main/samples)** helped this project go beyond Wassell's course.
 - **[Login UI inspiration](https://www.figma.com/community/file/1026170425902325131/loginuiconcept)** is from a public Figma design by **[Leo Barreto](https://www.figma.com/@LeoBarreto)**.
+- **[Homepage UI/UX inspiration](https://ndstudio.gov/)** is from the USA government's **National Design Studio**. I absolutely love everything they're doing.
 
 ---
 
