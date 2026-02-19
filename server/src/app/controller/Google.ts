@@ -6,6 +6,9 @@ import {
     updateOrCreateUserFromOauth,
 } from "../utils/googleOauthUtil.js";
 
+const GOOGLE_REDIRECT_BASE_URI =
+    process.env.GOOGLE_REDIRECT_BASE_URI || "http://localhost:5173";
+
 export const getGoogleOauthUrlRoute: RequestHandler = async (_req, res) => {
     const url = getGoogleOauthUrl();
     res.status(200).json({ url });
@@ -28,7 +31,7 @@ export const callbackRoute: RequestHandler = async (req, res) => {
             { expiresIn: "36h" },
         );
 
-        return res.redirect(`http://localhost:5173/login?token=${token}`);
+        return res.redirect(`${GOOGLE_REDIRECT_BASE_URI}/login?token=${token}`);
     } catch (err) {
         console.error(err);
         return res.sendStatus(500);

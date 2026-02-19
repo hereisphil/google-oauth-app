@@ -12,7 +12,7 @@ const Header = () => {
         <header className="flex justify-between items-center p-4 mb-4 border-b bg-accent">
             <Link
                 to="/"
-                className="font-bold text-lg md:text-xl hover:underline"
+                className="font-bold text-sm md:text-xl hover:underline"
             >
                 <Hash className="inline-block" />
                 Google OAuth App

@@ -49,7 +49,7 @@ export function LoginPage() {
     return (
         <main className="flex flex-col items-center justify-start gap-4">
             <div className="flex items-stretch bg-slate-200 rounded-xl shadow-xl overflow-hidden w-full max-w-5xl">
-                <div className="p-6 flex-1 flex items-center justify-center">
+                <div className="md:p-6 flex-1 flex items-center justify-center">
                     <img
                         src={illustration}
                         alt="illustration"
@@ -57,7 +57,7 @@ export function LoginPage() {
                     />
                 </div>
                 <div className="p-8 flex-1 flex flex-col justify-center items-center gap-6">
-                    <h2 className="font-bold text-2xl">
+                    <h2 className="font-bold text-2xl md:text-4xl text-center">
                         Create your Free Account
                     </h2>
                     <Button
@@ -104,9 +104,9 @@ export function LoginPage() {
                             </span>
                         </div>
                     </Button>
-                    <p className="text-sm text-muted-foreground text-center">
-                        By signing in with Google, you agree to our
-                        <br /> Terms of Service and Privacy Policy.
+                    <p className="text-xs md:text-sm text-muted-foreground text-center">
+                        By signing in with Google, you agree to our Terms of
+                        Service and Privacy Policy.
                     </p>
                 </div>
             </div>
