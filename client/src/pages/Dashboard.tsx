@@ -11,7 +11,7 @@ export function Dashboard() {
             if (user) {
                 try {
                     const response = await fetch(
-                        `${import.meta.env.VITE_API_BASE_URL}api/v1/auth/google/refresh`,
+                        `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/google/refresh`,
                         {
                             method: "POST",
                             headers: {
