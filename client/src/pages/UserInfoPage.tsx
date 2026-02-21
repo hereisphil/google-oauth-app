@@ -1,26 +1,14 @@
-import GDrivePicker from "@/components/google/GDrivePicker";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { useToken } from "../utils/useToken";
 
 export function UserInfoPage() {
     const { user } = useToken();
     // console.log("UserInfoPage user >>>", user);
-    const [showPicker, setShowPicker] = useState(false);
 
     return (
         <main className="flex flex-col items-center gap-8">
             <h1 className="font-bold text-3xl underline underline-offset-4">
                 User Info
             </h1>
-
-            {showPicker ? (
-                <GDrivePicker oauthToken={user?.accessToken || ""} />
-            ) : (
-                <Button onClick={() => setShowPicker(!showPicker)}>
-                    Show Google Drive Picker
-                </Button>
-            )}
 
             <div className="mt-4 w-full max-w-3xl bg-card text-card-foreground border rounded-2xl shadow-xl p-6 space-y-6">
                 {/* Header */}

@@ -153,3 +153,23 @@ export const updateOrCreateUserFromOauth = async (
         },
     ).exec();
 };
+
+/* -------------------------------------------------------------------------- */
+/*                 Get A New Access Token Using Refresh Token                 */
+/* -------------------------------------------------------------------------- */
+export const refreshGoogleAccessToken = async (refreshToken: string) => {
+    oauthClient.setCredentials({ refresh_token: refreshToken });
+
+    const { credentials } = await oauthClient.refreshAccessToken();
+
+    if (!credentials.access_token) {
+        throw new Error("Failed to refresh access token");
+    }
+
+    return {
+        accessToken: credentials.access_token,
+        accessTokenExpiresAt: credentials.expiry_date
+            ? new Date(credentials.expiry_date)
+            : undefined,
+    };
+};

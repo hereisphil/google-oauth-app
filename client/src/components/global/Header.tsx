@@ -23,6 +23,10 @@ const Header = () => {
                         Hello, {user.name}!
                     </span>
                     <div className="flex gap-2 justify-center items-center">
+                        <Button size="sm" onClick={() => navigate("dashboard")}>
+                            <User className="mr-0.5" />
+                            Dashboard
+                        </Button>
                         <Button size="sm" onClick={() => navigate("user-info")}>
                             <User className="mr-0.5" />
                             Profile

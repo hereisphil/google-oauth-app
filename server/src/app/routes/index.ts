@@ -1,6 +1,10 @@
 import type { Request, Response } from "express";
 import express from "express";
-import { callbackRoute, getGoogleOauthUrlRoute } from "../controller/Google.js";
+import {
+    callbackRoute,
+    getGoogleOauthUrlRoute,
+    refreshGoogleTokenRoute,
+} from "../controller/Google.js";
 import { getAuthenticatedUser } from "../controller/User.js";
 const router = express.Router();
 
@@ -21,6 +25,8 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/auth/google/url", getGoogleOauthUrlRoute);
 
 router.get("/auth/google/callback", callbackRoute);
+
+router.post("/auth/google/refresh", refreshGoogleTokenRoute);
 
 /* -------------------------------------------------------------------------- */
 /*                             Verify Token Route                             */

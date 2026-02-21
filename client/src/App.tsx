@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router";
+import { Dashboard } from "./pages/Dashboard.tsx";
 import { Home } from "./pages/Home.tsx";
 import { LoginPage } from "./pages/LoginPage.tsx";
 import { UserInfoPage } from "./pages/UserInfoPage.tsx";
@@ -13,6 +14,7 @@ function App() {
             {/* PRIVATE ROUTES: */}
             <Route element={<PrivateRoute redirectPath="/login" />}>
                 <Route path="/user-info" element={<UserInfoPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Route>
         </Routes>
     );

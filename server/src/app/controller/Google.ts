@@ -1,8 +1,10 @@
 import type { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
+import UserModel from "../model/User.js";
 import {
     getGoogleOauthUrl,
     getGoogleUser,
+    refreshGoogleAccessToken,
     updateOrCreateUserFromOauth,
 } from "../utils/googleOauthUtil.js";
 
@@ -32,6 +34,45 @@ export const callbackRoute: RequestHandler = async (req, res) => {
         );
 
         return res.redirect(`${GOOGLE_REDIRECT_BASE_URI}/login?token=${token}`);
+    } catch (err) {
+        console.error(err);
+        return res.sendStatus(500);
+    }
+};
+
+export const refreshGoogleTokenRoute: RequestHandler = async (req, res) => {
+    try {
+        const id = req.body.userId;
+        if (!id) {
+            return res.status(400).json({ message: "Missing user ID" });
+        }
+        const existingUser = await UserModel.findOne({
+            googleId: id,
+        }).exec();
+        if (!existingUser)
+            return res.status(400).json({
+                message: "User not found",
+                success: false,
+            });
+
+        if (!existingUser.refreshToken) {
+            return res.status(400).json({
+                message: "Refresh token not found",
+                success: false,
+            });
+        }
+
+        const refreshed = await refreshGoogleAccessToken(
+            existingUser.refreshToken,
+        );
+
+        existingUser.accessToken = refreshed.accessToken;
+        if (refreshed.accessTokenExpiresAt) {
+            existingUser.accessTokenExpiresAt = refreshed.accessTokenExpiresAt;
+        }
+        await existingUser.save();
+
+        return res.status(200).json({ message: "Token refreshed" });
     } catch (err) {
         console.error(err);
         return res.sendStatus(500);

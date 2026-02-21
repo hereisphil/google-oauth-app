@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 // Design inspired by the National Design Studio https://ndstudio.gov
 
-export const Home = () => {
+export function Home() {
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
 
@@ -47,4 +47,4 @@ export const Home = () => {
             </section>
         </main>
     );
-};
+}
