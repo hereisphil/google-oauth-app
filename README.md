@@ -5,7 +5,16 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
-> Last Updated: February 19, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+> Last Updated: February 20, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
+
+---
+
+# Live Site 🚀
+
+You may test and interact with app at:
+<https://google-oauth-app-three.vercel.app/>
+
+The app is deployed for free on **[Vercel](https://vercel.com/)**, both frontend and backend, while its MongoDB database is deployed for free on **[MongoDB Atlas](https://www.mongodb.com/products/platform)**.
 
 ---
 
@@ -105,7 +114,11 @@ Client (frontend):
 
 ### **Backend (Node.js / Express)**
 
-**Base URL:** `http://localhost:3001`
+**Base URL:**
+
+local: `http://localhost:3001`
+
+live: `https://google-oauth-backend-nine.vercel.app/`
 
 | Route                                                                               | Description                                              |
 | :---------------------------------------------------------------------------------- | :------------------------------------------------------- |
@@ -117,7 +130,11 @@ Client (frontend):
 
 ### **Frontend (React Client)**
 
-**Base URL:** `http://localhost:5173`
+**Base URL:**
+
+local: `http://localhost:5173`
+
+live: `https://google-oauth-app-three.vercel.app/`
 
 | Route                                           | Description                                                                   |
 | :---------------------------------------------- | :---------------------------------------------------------------------------- |
