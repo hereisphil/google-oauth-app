@@ -3,6 +3,7 @@ import express from "express";
 import {
     callbackRoute,
     getGoogleOauthUrlRoute,
+    parseSheetRoute,
     refreshGoogleTokenRoute,
 } from "../controller/Google.js";
 import { getAuthenticatedUser } from "../controller/User.js";
@@ -27,6 +28,11 @@ router.get("/auth/google/url", getGoogleOauthUrlRoute);
 router.get("/auth/google/callback", callbackRoute);
 
 router.post("/auth/google/refresh", refreshGoogleTokenRoute);
+
+/* -------------------------------------------------------------------------- */
+/*                        Google Sheets / CRM Routes                           */
+/* -------------------------------------------------------------------------- */
+router.post("/sheets/parse", parseSheetRoute);
 
 /* -------------------------------------------------------------------------- */
 /*                             Verify Token Route                             */

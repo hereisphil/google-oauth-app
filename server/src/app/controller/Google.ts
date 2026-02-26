@@ -7,6 +7,9 @@ import {
   refreshGoogleAccessToken,
   updateOrCreateUserFromOauth,
 } from "../utils/googleOauthUtil.js";
+import { getGoogleSheetData } from "../utils/googleSheetsUtil.js";
+import { validateSheetForCRM } from "../utils/crmValidator.js";
+import { parseContactsFromSheet } from "../utils/contactParser.js";
 
 const GOOGLE_REDIRECT_BASE_URI =
   process.env.GOOGLE_REDIRECT_BASE_URI || "http://localhost:5173";
@@ -102,6 +105,114 @@ export const refreshGoogleTokenRoute: RequestHandler = async (req, res) => {
       message: "Internal server error",
       error: err instanceof Error ? err.message : "Unknown error",
       success: false,
+    });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/*                              Parse Sheet Route                              */
+/* -------------------------------------------------------------------------- */
+
+export const parseSheetRoute: RequestHandler = async (req, res) => {
+  try {
+    // Extract fileId and userId from request body
+    const fileId = req.body.fileId;
+    const userId = req.body.userId;
+
+    // Validate that we have the required data
+    if (!fileId) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required field: fileId",
+      });
+    }
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required field: userId",
+      });
+    }
+
+    // Find the user in the database to get their access token
+    const existingUser = await UserModel.findOne({
+      googleId: userId,
+    }).exec();
+
+    if (!existingUser) {
+      return res.status(404).json({
+        success: false,
+        error: "User not found. Please log in again.",
+      });
+    }
+
+    if (!existingUser.accessToken) {
+      return res.status(401).json({
+        success: false,
+        error: "Access token not found. Please log in again.",
+      });
+    }
+
+    // Step 1: Fetch the sheet data from Google Sheets API
+    const sheetDataResult = await getGoogleSheetData(
+      fileId,
+      existingUser.accessToken,
+    );
+
+    if (!sheetDataResult.success || !sheetDataResult.data) {
+      return res.status(400).json({
+        success: false,
+        error: sheetDataResult.error || "Failed to read the Google Sheet",
+      });
+    }
+
+    // Step 2: Validate the sheet structure for CRM use
+    const validationResult = validateSheetForCRM(sheetDataResult.data);
+
+    if (!validationResult.isValid) {
+      return res.status(400).json({
+        success: false,
+        error:
+          validationResult.errorMessage || "Sheet is not valid for CRM use",
+      });
+    }
+
+    // Step 3: Parse the sheet data into Contact objects
+    const parseResult = parseContactsFromSheet(
+      sheetDataResult.data,
+      validationResult,
+    );
+
+    if (!parseResult.success || !parseResult.contacts) {
+      return res.status(400).json({
+        success: false,
+        error: parseResult.error || "Failed to parse contacts from sheet",
+      });
+    }
+
+    // Return the parsed contacts
+    return res.status(200).json({
+      success: true,
+      contacts: parseResult.contacts,
+      message: `Successfully loaded ${parseResult.contacts.length} contact(s) from the sheet`,
+    });
+  } catch (err) {
+    // Enhanced error logging
+    console.error("❌ Error in parseSheetRoute:");
+    console.error(
+      "Error type:",
+      err instanceof Error ? err.constructor.name : typeof err,
+    );
+    console.error(
+      "Error message:",
+      err instanceof Error ? err.message : String(err),
+    );
+    console.error("Full error:", err);
+
+    return res.status(500).json({
+      success: false,
+      error: "An internal server error occurred while processing the sheet",
+      details: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
