@@ -4,6 +4,7 @@ import illustration from "@/assets/images/login-crm-image.png";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { toast } from "sonner";
 import { useToken } from "../utils/useToken";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:3001";
@@ -24,8 +25,18 @@ export function LoginPage() {
         const queryParams = new URLSearchParams(location.search);
         const oauthToken = queryParams.get("token");
         if (!oauthToken) return;
+        
+        // Set the token and show success message
         setToken(oauthToken);
-        navigate("/user-info", { replace: true });
+        toast.success("Welcome back!", {
+            description: `Successfully signed in with Google. Redirecting to your profile...`,
+            duration: 3000,
+        });
+        
+        // Navigate after a brief delay to ensure toast is visible
+        setTimeout(() => {
+            navigate("/user-info", { replace: true });
+        }, 500);
     }, [location.search, setToken, navigate]);
 
     // Load Google OAuth URL from backend

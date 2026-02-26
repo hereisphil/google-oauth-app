@@ -57,7 +57,8 @@ export function Dashboard() {
     setShowPicker(false);
     // Show a friendly toast notification
     toast.info("Google Drive Picker canceled", {
-      description: "You can open the picker again anytime using the button below.",
+      description:
+        "You can open the picker again anytime using the same button.",
       duration: 3000,
     });
   };
