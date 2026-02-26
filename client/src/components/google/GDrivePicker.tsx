@@ -17,6 +17,17 @@ const GDrivePicker = ({
   const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
   const APP_ID = import.meta.env.VITE_APP_ID;
 
+  // Debug logging for Vercel 401: verify env and token (do not log full tokens)
+  console.log("[GDrivePicker] Env check:", {
+    hasClientId: Boolean(CLIENT_ID),
+    clientIdPrefix: CLIENT_ID ? `${String(CLIENT_ID).substring(0, 15)}...` : "MISSING",
+    hasAppId: Boolean(APP_ID),
+    appIdValue: APP_ID ?? "MISSING",
+    origin: typeof window !== "undefined" ? window.location.origin : "SSR",
+    hasOauthToken: Boolean(oauthToken),
+    oauthTokenLength: oauthToken?.length ?? 0,
+  });
+
   return (
     <DrivePicker
       client-id={CLIENT_ID}

@@ -6,11 +6,22 @@ import { toast } from "sonner";
 import { useToken } from "../utils/useToken";
 
 export function Dashboard() {
-  const { user } = useToken();
+  const { user, refetchUser } = useToken();
   const [showPicker, setShowPicker] = useState(false);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isLoadingSheet, setIsLoadingSheet] = useState(false);
   const [sheetError, setSheetError] = useState<string | null>(null);
+
+  // Debug: log when Picker is about to open so we can verify token/env on Vercel
+  useEffect(() => {
+    if (showPicker && user) {
+      console.log("[Dashboard] Opening Picker with:", {
+        hasUser: Boolean(user),
+        hasAccessToken: Boolean(user?.accessToken),
+        accessTokenLength: user?.accessToken?.length ?? 0,
+      });
+    }
+  }, [showPicker, user]);
 
   useEffect(() => {
     if (!user) return;
@@ -44,6 +55,9 @@ export function Dashboard() {
         } else {
           const data = await response.json();
           console.log("✅ Token refreshed successfully:", data);
+          // Refetch user so context has the new accessToken; Picker will then use fresh token
+          await refetchUser();
+          console.log("[Dashboard] User refetched after refresh; Picker will use updated accessToken.");
         }
       } catch (err) {
         console.error("❌ Error refreshing token:", err);
@@ -51,7 +65,7 @@ export function Dashboard() {
     };
 
     checkAndRefreshToken();
-  }, [user]);
+  }, [user, refetchUser]);
 
   // Handle when user cancels the picker
   const handlePickerCancel = () => {
