@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import Footer from "./components/global/Footer.tsx";
 import Header from "./components/global/Header.tsx";
 import { TokenProvider } from "./context/TokenContext.tsx";
+import { Toaster } from "./components/ui/sonner";
 import "./styles/index.css";
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById("root")!).render(
                 <Header />
                 <App />
                 <Footer />
+                <Toaster />
             </TokenProvider>
         </BrowserRouter>
     </StrictMode>,

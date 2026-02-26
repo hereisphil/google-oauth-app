@@ -1,10 +1,13 @@
 import GDrivePicker from "@/components/google/GDrivePicker";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useToken } from "../utils/useToken";
 
 export function Dashboard() {
   const { user } = useToken();
+  const [showPicker, setShowPicker] = useState(false);
+
   useEffect(() => {
     if (!user) return;
     // Check if user's access token is expired and refresh if needed
@@ -49,16 +52,39 @@ export function Dashboard() {
     checkAndRefreshToken();
   }, [user]);
 
-  const [showPicker, setShowPicker] = useState(false);
+  // Handle when user cancels the picker
+  const handlePickerCancel = () => {
+    setShowPicker(false);
+    // Show a friendly toast notification
+    toast.info("Google Drive Picker canceled", {
+      description: "You can open the picker again anytime using the button below.",
+      duration: 3000,
+    });
+  };
+
+  // Handle when user picks a file
+  const handlePickerPicked = (data: unknown) => {
+    console.log("File picked:", data);
+    setShowPicker(false);
+    toast.success("File selected successfully!", {
+      description: "You can process the selected file now.",
+      duration: 3000,
+    });
+  };
+
   return (
     <main className="flex flex-col items-center gap-8">
       <h1 className="font-bold text-3xl underline underline-offset-4">
         Dashboard
       </h1>
       {showPicker ? (
-        <GDrivePicker oauthToken={user?.accessToken || ""} />
+        <GDrivePicker
+          oauthToken={user?.accessToken || ""}
+          onCancel={handlePickerCancel}
+          onPicked={handlePickerPicked}
+        />
       ) : (
-        <Button onClick={() => setShowPicker(!showPicker)}>
+        <Button onClick={() => setShowPicker(true)}>
           Show Google Drive Picker
         </Button>
       )}
