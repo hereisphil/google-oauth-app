@@ -5,6 +5,8 @@ The objective is to create a **Full-Stack Web app** with _clean code_, _seperati
 implement **Google OAuth** _[(documentation)](https://support.google.com/cloud/answer/15544987?hl=en)_, without the use of
 3rd party libraries like _passport_.
 
+**Contact me if you'd like to be added as a test user to be able to test out my account. You'd need to give me your gmail**
+
 > Last Updated: February 25, 2025. This README.md file is a work-in-progress and will be incrementally updated as I update the app.
 
 ---
@@ -35,6 +37,7 @@ The app is deployed for free on **[Vercel](https://vercel.com/)**, both frontend
 - **[Google APIs Node.js Client](https://www.npmjs.com/package/googleapis)** is the official library for using Google APIs, created and maintained by Google themselves, and much of its documentation and **[Sample Code](https://github.com/googleapis/google-api-nodejs-client/tree/main/samples)** helped this project go beyond Wassell's course.
 - **[Login UI inspiration](https://www.figma.com/community/file/1026170425902325131/loginuiconcept)** is from a public Figma design by **[Leo Barreto](https://www.figma.com/@LeoBarreto)**.
 - **[Homepage UI/UX inspiration](https://ndstudio.gov/)** is from the USA government's **National Design Studio**. I absolutely love everything they're doing.
+- **[Cursor AI IDE](https://cursor.com/students)** is what I used to vibe-code the CRM portion of the app. After I implemented the Google Drive Picker I wasn't able to find enough resources to teach me on how to setup a simple CRM and so Cursor did it.
 
 ---
 
