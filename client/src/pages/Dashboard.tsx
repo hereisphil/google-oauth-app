@@ -57,7 +57,9 @@ export function Dashboard() {
           console.log("✅ Token refreshed successfully:", data);
           // Refetch user so context has the new accessToken; Picker will then use fresh token
           await refetchUser();
-          console.log("[Dashboard] User refetched after refresh; Picker will use updated accessToken.");
+          console.log(
+            "[Dashboard] User refetched after refresh; Picker will use updated accessToken.",
+          );
         }
       } catch (err) {
         console.error("❌ Error refreshing token:", err);
@@ -65,7 +67,7 @@ export function Dashboard() {
     };
 
     checkAndRefreshToken();
-  }, [user, refetchUser]);
+  }, [refetchUser]);
 
   // Handle when user cancels the picker
   const handlePickerCancel = () => {
