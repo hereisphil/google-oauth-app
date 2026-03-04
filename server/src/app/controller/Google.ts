@@ -12,8 +12,7 @@ import { validateSheetForCRM } from "../utils/crmValidator.js";
 import { parseContactsFromSheet } from "../utils/contactParser.js";
 
 const GOOGLE_REDIRECT_BASE_URI =
-  process.env.GOOGLE_REDIRECT_BASE_URI || "http://localhost:5173";
-
+  "https://google-oauth-app-git-te-3bbc65-phillip-cantus-projects-a53de6f9.vercel.app";
 export const getGoogleOauthUrlRoute: RequestHandler = async (_req, res) => {
   const url = getGoogleOauthUrl();
   res.status(200).json({ url });
